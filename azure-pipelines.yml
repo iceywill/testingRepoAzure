@@ -38,7 +38,7 @@ steps:
     -NoNewWindow
   env:
     SolutionPath: $(solution.path)
-    SolutionName: $(solution.name)
+    SolutionName: $(solution.name-cole)
   displayName: 'Solution Packager: pack solution'
 
 - task: PublishBuildArtifacts@1
@@ -56,13 +56,13 @@ steps:
         ("AuthType = Office365;" + `
         "Username = $env:ServiceAccountUpn;" + `
         "Password = $env:ServiceAccountPassword;" + `
-        "Url = https://org9b3a37e5.crm.dynamics.com/")
+        "Url = https://org9b3a37e5.crm.dynamics.com")
     Import-CrmSolution `
       -conn $connection `
       -SolutionFilePath $(Build.ArtifactStagingDirectory)\packedSolution\$($env:SolutionName).zip
   env:
     EnvironmentName: $(environment.name)
-    SolutionName: $(solution.name)
+    SolutionName: $(solution.name-cole)
     ServiceAccountUpn: $(serviceAccount.upn)
     ServiceAccountPassword: $(serviceAccount.password)
   displayName: 'Import solution'
